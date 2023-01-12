@@ -28,17 +28,17 @@ end
 
 function RegisterCommandsBruteforce()
 	-- /it
-	local itemCommand = Turbine.ShellCommand();
-	function itemCommand:Execute(command,args)
+	bruteforceCommand = Turbine.ShellCommand();
+	function bruteforceCommand:Execute(command,args)
 		BruteforceWindow:SetVisible( not BruteforceWindow:IsVisible() );
 	end
-	function itemCommand:GetHelp()
+	function bruteforceCommand:GetHelp()
 		return "Put item from bag into bruteforce window";
 	end
-	function itemCommand:GetShortHelp()
+	function bruteforceCommand:GetShortHelp()
 		return "Put item into bruteforce window";
 	end
-	Turbine.Shell.AddCommand( "it", itemCommand);
+	Turbine.Shell.AddCommand( "it", bruteforceCommand);
 end
 
 function LoadBruteforceMod()
