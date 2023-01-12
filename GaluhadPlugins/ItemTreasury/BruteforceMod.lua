@@ -66,7 +66,7 @@ function LoadBruteforceMod()
         Turbine.Shell.WriteLine(result);
     end
 
-    -- RegisterCommandsBruteforce();
+    RegisterCommandsBruteforce();
 
     print("Inventory Bag Item ID Bruteforce v" ..  BruteforceVersion .. ", by DCRM");
     print("FirstID = " ..  FIRSTID .. "; LastId = " .. LASTID .. ";");
