@@ -5,7 +5,7 @@ Command to open Bruteforce window `/it`
 Drop into Bruteforce window item from bag, result printed into chat
 ![How to use](/screen.png)
 
-## New database 
+## New database
 https://github.com/dt192/item-treasury-database
 
 ## For next updates
@@ -22,3 +22,5 @@ add
 ```
 LoadBruteforceMod();
 ```
+
+3. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua)
