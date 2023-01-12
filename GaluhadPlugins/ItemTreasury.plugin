@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Plugin>
+	<Information>
+		<Name>ItemTreasury</Name>
+		<Author>Galuhad</Author>
+		<Version>33.0.5</Version>
+		<Description>A tool to help search through the game's database of over 128,000 items.
+Database Version: Update 33.0.5</Description>
+		<Image>GaluhadPlugins/ItemTreasury/Resources/MainIcon.tga</Image>
+	</Information>
+	<Package>GaluhadPlugins.ItemTreasury.Main</Package>
+	<Configuration Apartment="ItemTreasury" />
+</Plugin>

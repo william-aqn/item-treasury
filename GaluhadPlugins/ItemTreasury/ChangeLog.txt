@@ -1,0 +1,106 @@
+
+v.33.0.5
+- Database matched to u33.0.5
+- Added a jump forward/backwards 10 pages button to the main window.
+- Added sort options for results. They can now be sorted by item name or ID and in ascending or descending order.
+
+v.32.0.2
+- New Feature: Item favourites! Bookmark items you refer back to often, and list them with the new 'Favourites' option in the dropdown menu.
+- Database updated to latest game version. The plugin automatically erases saved scans that match the new database. Some saved scans may have skipped database versions and remain by mistake, a delete button has been added to manually remove these from your saved items database.
+- Item scanner will now ignore all instances of GNDN items.
+- Added some new missing categories.
+
+v.25.4.2
+- New feature: Item and skill scanner. This scans live game data to find new items that have not yet been added to the plugin, these can be saved automatically into a new Saved 
+  Items database for future reference and searching. This will allow the plugin to be used alongside new game updates without needing an official update first.
+- Scanner will also show skills that it finds, this is more for developer reference for other plugins. Note that limitations in the API prevent auto-generating skill name so it will
+  have to be noted manually outside the plugin.
+- Items found in the scanner have a share icon which will print the item ID and name to the chat console.
+- Saved scanned items will automatically be removed from save once added to the official plugin database.
+- Added a desktop icon to easier access the plugin window instead of using the command. This icon can be dragged to reposition on the screen, and double clicked to open the window.
+- Plugin now responds to F12 and ESC key events to hide the window
+
+v.25.4.1
+- Added in missing categories for filtering (Ironfold, Minas Ithil etc.)
+- Added in new filtering for item quality.
+
+v.25.4
+- Database matched to update 25.4.3
+
+v.23.2
+- Database matched to update 23.2
+
+v.22.2
+- Database matched to update 22.2
+
+v.22.1
+- Changed search to also filter through item descriptions instead of just names.
+- Added missing categories for Doomfold recipes (note: Anorien recipes for some reason are tagged under Westemnet - this is a game error).
+- Added new items from update 22.1
+
+v.22.0.01
+- Database matched to update 22.0.1
+
+v.21.3
+- Database matched to update 21.3.2
+- Item Quantities will now be updated when the text box loses focus as well as by pressing enter.
+
+v.21.1
+- Database matched to update 21.1
+
+v.21.0.2
+- Database matched to update 21.0.2
+
+v.20.1.0
+- Databased matched to Update 20.1
+
+v.19.0.0
+- Database matched to Update 19.
+
+v.17.1.0
+- Updated to 17.1
+- Changed versioning to match updates of game
+
+v.1.1.9
+- Updated to 16.5
+
+v.1.1.8
+- Updated to 16.0
+
+v.1.1.7
+- Updated to 15.2
+
+v.1.1.6
+- Updated to 15.1
+
+v.1.1.5
+- Added option to search for items by ID from the main window
+- Updated to 15.0
+- Added new category for Beorning
+
+v.1.1.4
+- Updated to 14.2
+
+v.1.1.3
+- Updated to 14.1
+
+v.1.1.2
+- Updated to 14.0
+- Added 'Essence' category
+
+v.1.1.1
+- Updated to 13.1
+- Added quantity text fields to each item in the search results. Press enter to adjust in the item display. Can use this, for example, when needing to buy a specific number of an item.
+
+v.1.1.0
+- Updated to include 13.0 items
+- New dropdown added to allow you to select which database to search in. Options include latest update items and full database
+- Item categories now shown as part of the search results
+
+v.1.0.1
+- Fixed an error when trying to get command help
+- Added a number of missing categories to the dropdown menu
+- Visibility for the main window will be remembered between sessions. If the window was closed when you last unloaded, you will need to use the /item command to open it again.
+
+v.1.0.0
+- Initial Release
