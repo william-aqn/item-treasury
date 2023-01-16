@@ -13,6 +13,7 @@ https://github.com/dt192/item-treasury-database
 `import (PLUGINDIR..".Windows");`
 add
 ```
+import (PLUGINDIR..".RuItems");
 import (PLUGINDIR..".BruteforceMod");
 ```
 
