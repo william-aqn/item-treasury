@@ -26,7 +26,8 @@ import (PLUGINDIR..".Utils");
 -- Windows..
 import (PLUGINDIR..".Windows");
 
--- BruteforceMod
+-- BruteforceMod RU
+import (PLUGINDIR..".RuItems");
 import (PLUGINDIR..".BruteforceMod");
 -----------------------------------------------------------------------------------------------------------
 
