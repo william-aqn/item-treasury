@@ -47,7 +47,7 @@ for line in lines:
                 clr = re.sub('\[[a-zA-Z]+\]', '', loc)
 
                 rulua.write('[' + index + ']={[1]="' + clr + '";};\n')
-                ruluasearch.write('[' + index + ']={[1]="' + clr.lower().replace('-', '').replace('\'', '').replace('.', "").replace(',', "") + '";};\n')
+                ruluasearch.write('[' + index + ']={[1]="' + clr.lower().replace('-', '').replace('\'', '').replace('.', "").replace(',', "").replace('  ',' ') + '";};\n')
                 # rulua.write('[' + index + ']={[1]="' + clr + '";[2]="' + clr.lower().replace('-', '').replace('\'', '').replace('.', "").replace(',', "") + '";};\n')
                 # print(clr)
 
