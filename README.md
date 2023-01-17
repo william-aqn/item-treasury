@@ -1,4 +1,4 @@
-# Быстрый поиск оригинального предмета для RU LOTRO [item-treasury](http://www.lotrointerface.com/downloads/info870)
+# Быстрый поиск оригинального предмета для RU LOTRO [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
 
 Command to open Bruteforce window `/ru`
 
