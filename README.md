@@ -1,4 +1,4 @@
-# Add bruteforce item id window into [item-treasury](http://www.lotrointerface.com/downloads/info870) LOTRO
+# Быстрый поиск оригинального предмета для RU LOTRO [item-treasury](http://www.lotrointerface.com/downloads/info870)
 
 Command to open Bruteforce window `/ru`
 
@@ -24,4 +24,16 @@ add
 LoadBruteforceMod();
 ```
 
-3. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)
+3. [Windows/MainWin.lua:391](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L391) replace
+`string.gmatch(searchStr, "%a+")`
+```
+string.gmatch(searchStr, "%S+")
+
+```
+4. [Windows/MainWin.lua:438](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L438) replace
+`nameMatch = match;`
+```
+nameMatch = BruteforceSearch(k, searchName, match);
+```
+
+5. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)

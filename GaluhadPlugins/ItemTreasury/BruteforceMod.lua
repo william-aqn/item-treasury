@@ -1,5 +1,5 @@
 -- by DCRM
-BruteforceVersion = "0.2";
+BruteforceVersion = "0.3";
 BruteforceWindow = Turbine.UI.Lotro.Window();
 
 BruteforceStartId = FIRSTID -- FIRSTID 1879049233
@@ -7,24 +7,34 @@ BruteforceEndId = LASTID -- LASTID 1879448522
 BruteforceDb = _ITEMSDB
 BruteforceRuDb = _RUITEMS
 BruteforceRuDbVersion = RUVERSION
+
 function BruteforceItem(itemIn)
+    local ret = {["id"] = 0}
+
     local inner
     local ruItem
     local itemInName = itemIn:GetName()
+
+    ret["msg"] = "Запрос [" .. itemInName .. "] - ничего не найдено"
     for i = BruteforceStartId, BruteforceEndId do
 
         if Windows.ExistsInDB(i) and ExistsInRuDB(i) then
             if BruteforceRuDb[i][1] == itemInName then
                ruItem = BruteforceRuDb[i][1]
                inner = BruteforceDb[i][1]
-               return "Результат:[" ..
+
+               ret["id"] = i
+               ret["original"] = inner
+               ret["msg"]="Результат:[" ..
                inner ..
                "]\nID:[" ..
                i .. "]\nЗапрос:[" .. ruItem .. "]";
+
+               return ret
             end
         end
     end
-    return "Запрос [" .. itemInName .. "] - ничего не найдено"
+    return ret
 end
 
 function ExistsInRuDB(itemID)
@@ -62,8 +72,25 @@ function BruteforceItemHard(itemIn)
     return "Запрос [" .. itemIn:GetName() .. "] - ничего не найдено"
 end
 
+function BruteforceSearch(i, searchName, match)
+    if match then
+        return match
+    end
+    if not ExistsInRuDB(i) then
+        return false
+    end
+    local match = true;
+    local nameStr = string.upper(StripAccent(BruteforceRuDb[i][1]));
+    for wordKey,wordVal in pairs(searchName) do
+        if string.find(nameStr,wordVal) == nil then
+            match = false;
+        end
+    end
+    return match
+end
+
 function RegisterCommandsBruteforce()
-    -- /it
+    -- /ru
     bruteforceCommand = Turbine.ShellCommand();
     function bruteforceCommand:Execute(command, args)
         BruteforceWindow:SetVisible(not BruteforceWindow:IsVisible());
@@ -81,7 +108,8 @@ function RegisterCommandsBruteforce()
 end
 
 function LoadBruteforceMod()
-    local height = 250;
+    local height = 150;
+    -- Основное окно
     BruteforceWindow:SetSize(300, height);
     BruteforceWindow:SetTop((Turbine.UI.Display:GetHeight() - height) / 2);
     BruteforceWindow:SetLeft((Turbine.UI.Display:GetWidth() - 300) / 4);
@@ -89,21 +117,54 @@ function LoadBruteforceMod()
     BruteforceWindow:SetAllowDrop(true);
     BruteforceWindow:SetVisible(true);
 
-    local searchCaption = Turbine.UI.Label()
-    searchCaption:SetParent(BruteforceWindow)
-    searchCaption:SetSize(300, height)
-    searchCaption:SetPosition(10, 45)
-    searchCaption:SetText("Перетащите сюда предмет")
+    -- Подсказка
+    local BruteforceCaption = Turbine.UI.Label()
+    BruteforceCaption:SetParent(BruteforceWindow)
+    BruteforceCaption:SetSize(300, height)
+    BruteforceCaption:SetPosition(10, 45)
+    BruteforceCaption:SetText("Перетащите сюда предмет")
+
+    -- Быстрый слот для понимания того что распознано
+    local BruteforceShortcut = Turbine.UI.Lotro.Quickslot();
+	BruteforceShortcut:SetParent(BruteforceWindow);
+	BruteforceShortcut:SetSize(36,36);
+	BruteforceShortcut:SetPosition(50, height-50);
+	BruteforceShortcut:SetZOrder(10000);
+    BruteforceShortcut:SetEnabled(false);
+	BruteforceShortcut:SetVisible(false);
+    BruteforceShortcut:SetAllowDrop(false);
+
+    -- Открываем ItemTreasury
+    BruteforceButton = Turbine.UI.Lotro.Button();
+	BruteforceButton:SetParent(BruteforceWindow);
+	BruteforceButton:SetWidth(150);
+	BruteforceButton:SetPosition(100, height-40);
+	BruteforceButton:SetText("ItemTreasury");
+	BruteforceButton.Click = function ()
+        Windows.PrepareSearch();
+        Windows.wMainWin:SetVisible(true);
+        Windows.wMainWin:Activate();
+	end
 
     function BruteforceWindow:DragEnter(args)
     end
 
     function BruteforceWindow:DragDrop(args)
         local item = args.DragDropInfo:GetShortcut():GetItem();
-        searchCaption:SetText("Поиск ...")
+        BruteforceCaption:SetText("Поиск ...")
         local result = BruteforceItem(item)
-        searchCaption:SetText(result)
-        Turbine.Shell.WriteLine(result);
+        BruteforceCaption:SetText(result["msg"])
+        Turbine.Shell.WriteLine(result["msg"]);
+
+        if (result["id"]>0) then
+            -- Отображаем быстрый слот
+            BruteforceShortcut:SetVisible(true);
+            BruteforceShortcut:SetShortcut(Turbine.UI.Lotro.Shortcut(Turbine.UI.Lotro.ShortcutType.Item, "0x0,0x" .. Utils.TO_HEX(result["id"])));
+            -- Устанавливаем текст в строке поиска ItemTreasury
+            Windows.txtSearch:SetText(result["original"]);
+        else
+            BruteforceShortcut:SetVisible(false);
+        end
     end
 
     RegisterCommandsBruteforce();
@@ -112,4 +173,17 @@ function LoadBruteforceMod()
     print("FirstID = " .. BruteforceStartId .. "; LastId = " .. BruteforceEndId .. ";");
     print("Используйте команду '/ru' что бы показать/скрыть окно перевода предметов");
 
+end
+
+function Dump(o)
+    if type(o) == 'table' then
+        local s = '{\n'
+        for k,v in pairs(o) do
+                if type(k) ~= 'number' then k = '"'..k..'"' end
+                s = s .. '['..k..'] = ' .. Dump(v) .. '\n'
+        end
+        return s .. '}\n'
+    else
+        return ( tostring(o) )
+    end
 end

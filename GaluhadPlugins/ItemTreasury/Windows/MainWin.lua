@@ -388,7 +388,7 @@ function PrepareSearch()
 
 	local searchName = {};
 	local searchStr = string.upper(StripAccent(searchString));
-	for w in string.gmatch(searchStr, "%a+") do
+	for w in string.gmatch(searchStr, "%S+") do
 		table.insert(searchName,w);
 	end
 	lstResults:ClearItems();
@@ -434,7 +434,8 @@ function PrepareSearch()
 					match = false;
 				end
 			end
-			nameMatch = match;
+			-- RU DB search
+			nameMatch = BruteforceSearch(k, searchName, match);
 		end
 
 		-- Item description
