@@ -3,7 +3,7 @@ import("GaluhadPlugins.ItemTreasury.RuItemsSearch")
 --import ("GaluhadPlugins.ItemTreasury.UTF")
 
 -- by DCRM
-BruteforceVersion = "0.3";
+BruteforceVersion = "0.4";
 BruteforceWindow = Turbine.UI.Lotro.Window();
 
 BruteforceStartId = FIRSTID -- FIRSTID 1879049233
@@ -15,9 +15,13 @@ BruteforceRuDbVersion = RUVERSION
 
 -- Переопределяем названия предметов в основном окне плагина
 function BruteforceTextOverride(label, itemInfo, itemID)
-    if (ddLang:GetText() == 'ru') then
+    if (ddLang:GetText() == 'ru' or ddLang:GetText() == 'all') then
         if ExistsInRuDB(itemID) then
-            label:SetText(BruteforceRuDb[itemID][1]);
+            if ddLang:GetText() == 'ru' then
+                label:SetText(BruteforceRuDb[itemID][1]);
+            else
+                label:SetText(BruteforceRuDb[itemID][1]..'\n'..itemInfo[1]); 
+            end
             return BruteforceRuDb[itemID]
         end
     end
@@ -142,7 +146,7 @@ end
 function LoadBruteforceMod()
 
     -- Переключатель ru/en
-    ddLang = Utils.DropDown({ "ru", "en" });
+    ddLang = Utils.DropDown({ "ru", "en", "all" });
     ddLang:SetParent(Windows.wMainWin);
     ddLang:SetPosition(Windows.ddSortBy:GetLeft() - 100, Windows.ddSortBy:GetTop());
     ddLang:SetWidth(50);
