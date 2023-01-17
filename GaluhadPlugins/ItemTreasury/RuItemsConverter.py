@@ -30,7 +30,7 @@ _RUITEMS =
 """)
 
 ruluasearch = open(fileRuResultSearch, "w", encoding='utf-8')
-ruluasearch.write("""RUVERSION = "33.0.5";
+ruluasearch.write("""
 _RUITEMS_SEARCH =
 {
 """)
