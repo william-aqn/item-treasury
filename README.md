@@ -45,4 +45,4 @@ nameMatch = BruteforceSearch(k, searchName, match);
 BruteforceTextOverride(lblName,itemInfo,itemID)
 ```
 
-6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)
+6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua) +  [RuItemsSearch.lua](/GaluhadPlugins/ItemTreasury/RuItemsSearch.lua)
