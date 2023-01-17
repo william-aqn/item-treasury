@@ -1,6 +1,6 @@
 # Add bruteforce item id window into [item-treasury](http://www.lotrointerface.com/downloads/info870) LOTRO
 
-Command to open Bruteforce window `/it`
+Command to open Bruteforce window `/ru`
 
 Drop into Bruteforce window item from bag, result printed into chat
 ![How to use](/screen.png)
