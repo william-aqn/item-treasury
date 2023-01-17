@@ -1,4 +1,5 @@
 import("GaluhadPlugins.ItemTreasury.RuItems")
+import("GaluhadPlugins.ItemTreasury.RuItemsSearch")
 --import ("GaluhadPlugins.ItemTreasury.UTF")
 
 -- by DCRM
@@ -9,6 +10,7 @@ BruteforceStartId = FIRSTID -- FIRSTID 1879049233
 BruteforceEndId = LASTID -- LASTID 1879448522
 BruteforceDb = _ITEMSDB
 BruteforceRuDb = _RUITEMS
+BruteforceRuDbSearch = _RUITEMS_SEARCH
 BruteforceRuDbVersion = RUVERSION
 
 -- Переопределяем названия предметов в основном окне плагина
@@ -104,6 +106,18 @@ function BruteforceSearch(i, searchName, match)
             match = false;
         end
     end
+
+    -- Поиск в нижнем регистре по отдельной базе
+    if not match then
+        match = true;
+        local nameStr = string.upper(BruteforceRuDbSearch[i][1]);
+        for wordKey, wordVal in pairs(searchName) do
+            if string.find(nameStr, wordVal) == nil then
+                match = false;
+            end
+        end
+    end
+
     return match
 end
 

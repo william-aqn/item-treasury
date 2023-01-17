@@ -4,6 +4,7 @@ from pandas_ods_reader import read_ods
 
 fileRuItems = "lotro-items-ru.ods"  # Спасибо большое команде переводчиков за предоставленный файл
 fileRuResult = "RuItems.lua"  # БД с Русскими названиями и ID
+fileRuResultSearch = "RuItemsSearch.lua"  # БД с Русскими названиями и ID для поиска
 fileItemsDbFromPlugin = "items.lua"  # БД из плагина
 
 df = read_ods(fileRuItems, 1, columns=["A", "B"], headers=False)
@@ -27,6 +28,13 @@ rulua.write("""RUVERSION = "33.0.5";
 _RUITEMS =
 {
 """)
+
+ruluasearch = open(fileRuResultSearch, "w", encoding='utf-8')
+ruluasearch.write("""RUVERSION = "33.0.5";
+_RUITEMS_SEARCH =
+{
+""")
+
 src = open(fileItemsDbFromPlugin, "r", encoding='utf-8')
 lines = src.readlines()
 for line in lines:
@@ -37,7 +45,11 @@ for line in lines:
             loc = search(index)
             if loc:
                 clr = re.sub('\[[a-zA-Z]+\]', '', loc)
-                rulua.write('[' + index + ']={[1]="' + clr + '";};\n')
-                print(clr)
 
+                rulua.write('[' + index + ']={[1]="' + clr + '";};\n')
+                ruluasearch.write('[' + index + ']={[1]="' + clr.lower().replace('-', '').replace('\'', '').replace('.', "").replace(',', "") + '";};\n')
+                # rulua.write('[' + index + ']={[1]="' + clr + '";[2]="' + clr.lower().replace('-', '').replace('\'', '').replace('.', "").replace(',', "") + '";};\n')
+                # print(clr)
+
+ruluasearch.write("""};""")
 rulua.write("""};""")
