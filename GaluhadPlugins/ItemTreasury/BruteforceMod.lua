@@ -1,3 +1,6 @@
+import("GaluhadPlugins.ItemTreasury.RuItems")
+--import ("GaluhadPlugins.ItemTreasury.UTF")
+
 -- by DCRM
 BruteforceVersion = "0.3";
 BruteforceWindow = Turbine.UI.Lotro.Window();
@@ -8,8 +11,21 @@ BruteforceDb = _ITEMSDB
 BruteforceRuDb = _RUITEMS
 BruteforceRuDbVersion = RUVERSION
 
+-- Переопределяем названия предметов в основном окне плагина
+function BruteforceTextOverride(label, itemInfo, itemID)
+    if (ddLang:GetText() == 'ru') then
+        if ExistsInRuDB(itemID) then
+            label:SetText(BruteforceRuDb[itemID][1]);
+            return BruteforceRuDb[itemID]
+        end
+    end
+    label:SetText(itemInfo[1]);
+    return itemInfo
+end
+
+-- Находим предмет в РУ базе
 function BruteforceItem(itemIn)
-    local ret = {["id"] = 0}
+    local ret = { ["id"] = 0 }
 
     local inner
     local ruItem
@@ -20,17 +36,17 @@ function BruteforceItem(itemIn)
 
         if Windows.ExistsInDB(i) and ExistsInRuDB(i) then
             if BruteforceRuDb[i][1] == itemInName then
-               ruItem = BruteforceRuDb[i][1]
-               inner = BruteforceDb[i][1]
+                ruItem = BruteforceRuDb[i][1]
+                inner = BruteforceDb[i][1]
 
-               ret["id"] = i
-               ret["original"] = inner
-               ret["msg"]="Результат:[" ..
-               inner ..
-               "]\nID:[" ..
-               i .. "]\nЗапрос:[" .. ruItem .. "]";
+                ret["id"] = i
+                ret["original"] = inner
+                ret["msg"] = "Результат:[" ..
+                    inner ..
+                    "]\nID:[" ..
+                    i .. "]\nЗапрос:[" .. ruItem .. "]";
 
-               return ret
+                return ret
             end
         end
     end
@@ -64,7 +80,8 @@ function BruteforceItemHard(itemIn)
                     return "DB:[" ..
                         inner ..
                         "]\nID:[" ..
-                        i .. "]\nЗапрос:[" .. itemIn:GetName() .. "]\nНайдено:[" .. curItemInfo:GetName() .. "]";
+                        i .. "]\nЗапрос:[" .. itemIn:GetName() .. "]\nНайдено:[" ..
+                        curItemInfo:GetName() .. "]";
                 end
             end
         end
@@ -72,6 +89,7 @@ function BruteforceItemHard(itemIn)
     return "Запрос [" .. itemIn:GetName() .. "] - ничего не найдено"
 end
 
+--debugPring = true
 function BruteforceSearch(i, searchName, match)
     if match then
         return match
@@ -80,9 +98,9 @@ function BruteforceSearch(i, searchName, match)
         return false
     end
     local match = true;
-    local nameStr = string.upper(StripAccent(BruteforceRuDb[i][1]));
-    for wordKey,wordVal in pairs(searchName) do
-        if string.find(nameStr,wordVal) == nil then
+    local nameStr = string.upper(BruteforceRuDb[i][1]);
+    for wordKey, wordVal in pairs(searchName) do
+        if string.find(nameStr, wordVal) == nil then
             match = false;
         end
     end
@@ -108,6 +126,17 @@ function RegisterCommandsBruteforce()
 end
 
 function LoadBruteforceMod()
+
+    -- Переключатель ru/en
+    ddLang = Utils.DropDown({ "ru", "en" });
+    ddLang:SetParent(Windows.wMainWin);
+    ddLang:SetPosition(Windows.ddSortBy:GetLeft() - 100, Windows.ddSortBy:GetTop());
+    ddLang:SetWidth(50);
+    ddLang:SetAlignment(Turbine.UI.ContentAlignment.MiddleLeft);
+    ddLang.ItemChanged = function(Sender, Args)
+        Windows.RefreshResultsView();
+    end
+
     local height = 150;
     -- Основное окно
     BruteforceWindow:SetSize(300, height);
@@ -126,25 +155,25 @@ function LoadBruteforceMod()
 
     -- Быстрый слот для понимания того что распознано
     local BruteforceShortcut = Turbine.UI.Lotro.Quickslot();
-	BruteforceShortcut:SetParent(BruteforceWindow);
-	BruteforceShortcut:SetSize(36,36);
-	BruteforceShortcut:SetPosition(50, height-50);
-	BruteforceShortcut:SetZOrder(10000);
+    BruteforceShortcut:SetParent(BruteforceWindow);
+    BruteforceShortcut:SetSize(36, 36);
+    BruteforceShortcut:SetPosition(50, height - 50);
+    BruteforceShortcut:SetZOrder(10000);
     BruteforceShortcut:SetEnabled(false);
-	BruteforceShortcut:SetVisible(false);
+    BruteforceShortcut:SetVisible(false);
     BruteforceShortcut:SetAllowDrop(false);
 
     -- Открываем ItemTreasury
     BruteforceButton = Turbine.UI.Lotro.Button();
-	BruteforceButton:SetParent(BruteforceWindow);
-	BruteforceButton:SetWidth(150);
-	BruteforceButton:SetPosition(100, height-40);
-	BruteforceButton:SetText("ItemTreasury");
-	BruteforceButton.Click = function ()
+    BruteforceButton:SetParent(BruteforceWindow);
+    BruteforceButton:SetWidth(150);
+    BruteforceButton:SetPosition(100, height - 40);
+    BruteforceButton:SetText("ItemTreasury");
+    BruteforceButton.Click = function()
         Windows.PrepareSearch();
         Windows.wMainWin:SetVisible(true);
         Windows.wMainWin:Activate();
-	end
+    end
 
     function BruteforceWindow:DragEnter(args)
     end
@@ -156,10 +185,11 @@ function LoadBruteforceMod()
         BruteforceCaption:SetText(result["msg"])
         Turbine.Shell.WriteLine(result["msg"]);
 
-        if (result["id"]>0) then
+        if (result["id"] > 0) then
             -- Отображаем быстрый слот
             BruteforceShortcut:SetVisible(true);
-            BruteforceShortcut:SetShortcut(Turbine.UI.Lotro.Shortcut(Turbine.UI.Lotro.ShortcutType.Item, "0x0,0x" .. Utils.TO_HEX(result["id"])));
+            BruteforceShortcut:SetShortcut(Turbine.UI.Lotro.Shortcut(Turbine.UI.Lotro.ShortcutType.Item,
+                "0x0,0x" .. Utils.TO_HEX(result["id"])));
             -- Устанавливаем текст в строке поиска ItemTreasury
             Windows.txtSearch:SetText(result["original"]);
         else
@@ -169,7 +199,8 @@ function LoadBruteforceMod()
 
     RegisterCommandsBruteforce();
 
-    print("RU БД версия " .. BruteforceRuDbVersion .. ", модификация версия " .. BruteforceVersion .. ", by DCRM");
+    print("RU БД версия " .. BruteforceRuDbVersion .. ", модификация версия " ..
+        BruteforceVersion .. ", by DCRM");
     print("FirstID = " .. BruteforceStartId .. "; LastId = " .. BruteforceEndId .. ";");
     print("Используйте команду '/ru' что бы показать/скрыть окно перевода предметов");
 
@@ -178,12 +209,12 @@ end
 function Dump(o)
     if type(o) == 'table' then
         local s = '{\n'
-        for k,v in pairs(o) do
-                if type(k) ~= 'number' then k = '"'..k..'"' end
-                s = s .. '['..k..'] = ' .. Dump(v) .. '\n'
+        for k, v in pairs(o) do
+            if type(k) ~= 'number' then k = '"' .. k .. '"' end
+            s = s .. '[' .. k .. '] = ' .. Dump(v) .. '\n'
         end
         return s .. '}\n'
     else
-        return ( tostring(o) )
+        return (tostring(o))
     end
 end

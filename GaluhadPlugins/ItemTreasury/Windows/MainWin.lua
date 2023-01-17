@@ -676,7 +676,8 @@ function GetItemInfoDisplay(itemID)
 	lblName:SetFont(_FONTS[2]);
 	lblName:SetForeColor(_QUALITYCOLORS[itemInfo[4]]);
 	lblName:SetMouseVisible(false);
-	lblName:SetText(itemInfo[1]);
+	BruteforceTextOverride(lblName,itemInfo,itemID)
+	--lblName:SetText(itemInfo[1]);
 
 	local lblCateg = Turbine.UI.Label();
 	lblCateg:SetParent(cItemContainer);
