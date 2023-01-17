@@ -5,6 +5,9 @@ Command to open Bruteforce window `/ru`
 Drop into Bruteforce window item from bag, result printed into chat
 ![How to use](/screen.png)
 
+Or enter Русское название in search filed item-treasury windows
+![How to use](/screen-window.png)
+
 ## New database
 https://github.com/dt192/item-treasury-database
 
