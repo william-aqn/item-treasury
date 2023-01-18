@@ -48,29 +48,9 @@ CheckAndPatch `
     -replace 'lblName:SetText\(itemInfo\[1\]\);' `
     -patch "BruteforceTextOverride(lblName,itemInfo,itemID)"
 
-CheckAndPatch `
-    -file ".\Main.lua" `
-    -pattern 'import \(PLUGINDIR\.\."\.Items"\);' `
-    -replace 'import \(PLUGINDIR\.\."\.(.+)_Items"\);' `
-    -patch "import (PLUGINDIR..`".Items`");"
-
-CheckAndPatch `
-    -file ".\Main.lua" `
-    -pattern 'import \(PLUGINDIR\.\."\.NewItems"\);' `
-    -replace 'import \(PLUGINDIR\.\."\.(.+)_NewItems"\);' `
-    -patch "import (PLUGINDIR..`".NewItems`");"
-
 download `
     -from "https://github.com/william-aqn/item-treasury/raw/main/GaluhadPlugins/ItemTreasury/BruteforceMod.lua" `
     -to ".\BruteforceMod.lua"
-
-download `
-    -from "https://github.com/dt192/item-treasury-database/raw/patch/Items.lua" `
-    -to ".\Items.lua"
-
-download `
-    -from "https://github.com/dt192/item-treasury-database/raw/patch/NewItems.lua" `
-    -to ".\NewItems.lua"
 
 download `
     -from "https://github.com/dt192/item-treasury-database/raw/patch/RuItems.lua" `

@@ -1,2 +1,4 @@
-PowerShell.exe Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-PowerShell.exe -File ".\_update.ps1"
+powershell Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+powershell -File ".\_update.ps1"
+@REM powershell -File ".\_update_en.ps1"
+update_en.cmd
