@@ -1,5 +1,10 @@
 # Быстрый поиск оригинального предмета для RU LOTRO [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
 
+
+## Autoupdate script
+Just run PowerShell script to update all databases and (re)patch original plugin [/GaluhadPlugins/ItemTreasury/_update.ps1](/GaluhadPlugins/ItemTreasury/_update.ps1)
+
+## Instructions
 Command to open Bruteforce window `/ru`
 
 Drop into Bruteforce window item from bag, result printed into chat
@@ -8,10 +13,10 @@ Drop into Bruteforce window item from bag, result printed into chat
 Or enter Русское название in search filed item-treasury windows
 ![How to use](/screen-window.png)
 
-## New database
+## New database source
 https://github.com/dt192/item-treasury-database
 
-## For next updates
+## For next updates reminds
 1. [Main.lua:30](/GaluhadPlugins/ItemTreasury/Main.lua#L30) after 
 `import (PLUGINDIR..".Windows");`
 add
