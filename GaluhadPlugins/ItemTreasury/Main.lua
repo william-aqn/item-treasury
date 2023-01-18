@@ -16,8 +16,8 @@ import (PLUGINDIR..".Strings");
 import (PLUGINDIR..".AddCallBack");
 import (PLUGINDIR..".Functions");
 import (PLUGINDIR..".Commands");
-import (PLUGINDIR..".33_0_5_Items");
-import (PLUGINDIR..".33_0_5_NewItems");
+import (PLUGINDIR..".Items");
+import (PLUGINDIR..".NewItems");
 import (PLUGINDIR..".Category");
 
 -- Utils Imports..
