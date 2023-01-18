@@ -104,6 +104,7 @@ function BruteforceSearch(i, searchString, match)
 
 	local searchName = {};
 	local searchStr = toLower(StripAccent(searchString));
+    searchStr = string.gsub(searchStr, "[%p%c]", ''):gsub("  ",' '):gsub("  ",' ')
 	for w in string.gmatch(searchStr, "%S+") do
 		table.insert(searchName, w);
 	end
