@@ -75,3 +75,7 @@ download `
 download `
     -from "https://github.com/dt192/item-treasury-database/raw/patch/RuItems.lua" `
     -to ".\RuItems.lua"
+
+download `
+    -from "https://github.com/william-aqn/item-treasury/raw/main/GaluhadPlugins/ItemTreasury/_update.ps1" `
+    -to ".\_update.ps1"

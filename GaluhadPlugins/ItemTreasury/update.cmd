@@ -1,0 +1,1 @@
+PowerShell.exe -File ".\_update.ps1"

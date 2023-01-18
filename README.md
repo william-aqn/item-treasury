@@ -1,8 +1,9 @@
 # Быстрый поиск оригинального предмета для RU LOTRO [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
 
 
-## Autoupdate script
-Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin [/GaluhadPlugins/ItemTreasury/_update.ps1](/GaluhadPlugins/ItemTreasury/_update.ps1)
+## [Auto-update](/GaluhadPlugins/ItemTreasury/_update.ps1) script
+Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin 
+* double click to `update.cmd`
 
 ## Instructions
 Command to open Bruteforce window `/ru`
