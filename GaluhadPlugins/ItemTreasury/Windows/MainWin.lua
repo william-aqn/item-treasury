@@ -435,7 +435,7 @@ function PrepareSearch()
 				end
 			end
 			-- RU DB search
-			nameMatch = BruteforceSearch(k, searchName, match);
+			nameMatch = BruteforceSearch(k, searchString, match);
 		end
 
 		-- Item description
