@@ -26,23 +26,16 @@ add
 LoadBruteforceMod();
 ```
 
-3. [Windows/MainWin.lua:391](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L391) replace
-`string.gmatch(searchStr, "%a+")`
-```
-string.gmatch(searchStr, "%S+")
-
-```
-
-4. [Windows/MainWin.lua:438](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L438) replace
+3. [Windows/MainWin.lua:438](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L438) replace
 `nameMatch = match;`
 ```
-nameMatch = BruteforceSearch(k, searchName, match);
+nameMatch = BruteforceSearch(k, searchString, match);
 ```
 
-5. [Windows/MainWin.lua:679](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L679) replace
+4. [Windows/MainWin.lua:679](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L679) replace
 `lblName:SetText(itemInfo[1]);`
 ```
 BruteforceTextOverride(lblName,itemInfo,itemID)
 ```
 
-6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua) +  [RuItemsSearch.lua](/GaluhadPlugins/ItemTreasury/RuItemsSearch.lua)
+5. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)

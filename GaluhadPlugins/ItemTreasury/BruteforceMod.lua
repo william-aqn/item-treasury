@@ -94,18 +94,23 @@ function BruteforceItemHard(itemIn)
 end
 
 
-function BruteforceSearch(i, searchName, match)
+function BruteforceSearch(i, searchString, match)
     if match then
         return match
     end
     if not ExistsInRuDB(i) then
         return false
     end
-    local match = true;
+
+	local searchName = {};
+	local searchStr = toLower(StripAccent(searchString));
+	for w in string.gmatch(searchStr, "%S+") do
+		table.insert(searchName, w);
+	end
+
     local nameStr = toLower(BruteforceRuDb[i][1]);
     for wordKey, wordVal in pairs(searchName) do
-        local wordValLower = toLower(wordVal)
-        if string.find(nameStr, wordValLower) == nil then
+        if string.find(nameStr, wordVal) == nil then
             match = false;
         end
     end

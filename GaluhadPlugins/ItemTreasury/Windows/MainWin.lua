@@ -388,7 +388,7 @@ function PrepareSearch()
 
 	local searchName = {};
 	local searchStr = string.upper(StripAccent(searchString));
-	for w in string.gmatch(searchStr, "%S+") do
+	for w in string.gmatch(searchStr, "%a+") do
 		table.insert(searchName,w);
 	end
 	lstResults:ClearItems();
