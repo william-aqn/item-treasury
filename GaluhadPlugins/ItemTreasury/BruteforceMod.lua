@@ -1,9 +1,7 @@
 import("GaluhadPlugins.ItemTreasury.RuItems")
-import("GaluhadPlugins.ItemTreasury.RuItemsSearch")
---import ("GaluhadPlugins.ItemTreasury.UTF")
 
 -- by DCRM
-BruteforceVersion = "0.4";
+BruteforceVersion = "0.5";
 BruteforceWindow = Turbine.UI.Lotro.Window();
 
 BruteforceStartId = FIRSTID -- FIRSTID 1879049233
@@ -95,7 +93,7 @@ function BruteforceItemHard(itemIn)
     return "Запрос [" .. itemIn:GetName() .. "] - ничего не найдено"
 end
 
---debugPring = true
+
 function BruteforceSearch(i, searchName, match)
     if match then
         return match
@@ -104,21 +102,11 @@ function BruteforceSearch(i, searchName, match)
         return false
     end
     local match = true;
-    local nameStr = string.upper(BruteforceRuDb[i][1]);
+    local nameStr = toLower(BruteforceRuDb[i][1]);
     for wordKey, wordVal in pairs(searchName) do
-        if string.find(nameStr, wordVal) == nil then
+        local wordValLower = toLower(wordVal)
+        if string.find(nameStr, wordValLower) == nil then
             match = false;
-        end
-    end
-
-    -- Поиск в нижнем регистре по отдельной базе
-    if not match then
-        match = true;
-        local nameStr = string.upper(BruteforceRuDbSearch[i][1]);
-        for wordKey, wordVal in pairs(searchName) do
-            if string.find(nameStr, wordVal) == nil then
-                match = false;
-            end
         end
     end
 
@@ -224,6 +212,8 @@ function LoadBruteforceMod()
 
 end
 
+-- Service functions
+-------------------------------------------------------------------------------------------------
 function Dump(o)
     if type(o) == 'table' then
         local s = '{\n'
@@ -236,3 +226,148 @@ function Dump(o)
         return (tostring(o))
     end
 end
+
+-- Magic from dt192
+function utf8charbytes(s, i)
+	-- argument defaults
+	i = i or 1
+
+	-- argument checking
+	if type(s) ~= "string" then
+		error("bad argument #1 to 'utf8charbytes' (string expected, got ".. type(s).. ")")
+	end
+	if type(i) ~= "number" then
+		error("bad argument #2 to 'utf8charbytes' (number expected, got ".. type(i).. ")")
+	end
+
+	local c = s:byte(i)
+
+	-- determine bytes needed for character, based on RFC 3629
+	-- validate byte 1
+	if c > 0 and c <= 127 then
+		-- UTF8-1
+		return 1
+
+	elseif c >= 194 and c <= 223 then
+		-- UTF8-2
+		local c2 = s:byte(i + 1)
+
+		if not c2 then
+			error("UTF-8 string terminated early")
+		end
+
+		-- validate byte 2
+		if c2 < 128 or c2 > 191 then
+			error("Invalid UTF-8 character")
+		end
+
+		return 2
+
+	elseif c >= 224 and c <= 239 then
+		-- UTF8-3
+		local c2 = s:byte(i + 1)
+		local c3 = s:byte(i + 2)
+
+		if not c2 or not c3 then
+			error("UTF-8 string terminated early")
+		end
+
+		-- validate byte 2
+		if c == 224 and (c2 < 160 or c2 > 191) then
+			error("Invalid UTF-8 character")
+		elseif c == 237 and (c2 < 128 or c2 > 159) then
+			error("Invalid UTF-8 character")
+		elseif c2 < 128 or c2 > 191 then
+			error("Invalid UTF-8 character")
+		end
+
+		-- validate byte 3
+		if c3 < 128 or c3 > 191 then
+			error("Invalid UTF-8 character")
+		end
+
+		return 3
+
+	elseif c >= 240 and c <= 244 then
+		-- UTF8-4
+		local c2 = s:byte(i + 1)
+		local c3 = s:byte(i + 2)
+		local c4 = s:byte(i + 3)
+
+		if not c2 or not c3 or not c4 then
+			error("UTF-8 string terminated early")
+		end
+
+		-- validate byte 2
+		if c == 240 and (c2 < 144 or c2 > 191) then
+			error("Invalid UTF-8 character")
+		elseif c == 244 and (c2 < 128 or c2 > 143) then
+			error("Invalid UTF-8 character")
+		elseif c2 < 128 or c2 > 191 then
+			error("Invalid UTF-8 character")
+		end
+		
+		-- validate byte 3
+		if c3 < 128 or c3 > 191 then
+			error("Invalid UTF-8 character")
+		end
+
+		-- validate byte 4
+		if c4 < 128 or c4 > 191 then
+			error("Invalid UTF-8 character")
+		end
+
+		return 4
+
+	else
+		error("Invalid UTF-8 character")
+	end
+end
+
+
+utf8_uc_lc = {["А"]="а",["Б"]="б",["В"]="в",["Г"]="г",["Д"]="д",["Е"]="е",["Ж"]="ж",["З"]="з",["И"]="и",["Й"]="й",["К"]="к",["Л"]="л",["М"]="м",["Н"]="н",["О"]="о",["П"]="п",["Р"]="р",["С"]="с",["Т"]="т",["У"]="у",["Ф"]="ф",["Х"]="х",["Ц"]="ц",["Ч"]="ч",["Ш"]="ш",["Щ"]="щ",["Ъ"]="ъ",["Ы"]="ы",["Ь"]="ь",["Э"]="э",["Ю"]="ю",["Я"]="я",};
+
+utf8_lc_uc = {["а"]="А",["б"]="Б",["в"]="В",["г"]="Г",["д"]="Д",["е"]="Е",["ж"]="Ж",["з"]="З",["и"]="И",["й"]="Й",["к"]="К",["л"]="Л",["м"]="М",["н"]="Н",["о"]="О",["п"]="П",["р"]="Р",["с"]="С",["т"]="Т",["у"]="У",["ф"]="Ф",["х"]="Х",["ц"]="Ц",["ч"]="Ч",["ш"]="Ш",["щ"]="Щ",["ъ"]="Ъ",["ы"]="Ы",["ь"]="Ь",["э"]="Э",["ю"]="Ю",["я"]="Я",};
+
+function addUppers(name, upperPosArr)
+  table.sort(upperPosArr);
+  local returnStr = "";
+  local upperPosArrIdx = 1;
+  local letterPos = 1;
+  local bytePos = 1;
+	while bytePos <= #name do
+    local byteCount = utf8charbytes(name, bytePos);
+    local c = name:sub(bytePos, bytePos + byteCount - 1);
+    if (letterPos == upperPosArr[upperPosArrIdx]) then
+      c = (utf8_lc_uc[c] or c);
+      upperPosArrIdx = upperPosArrIdx + 1;
+    end
+    returnStr = returnStr .. c;
+    bytePos = bytePos + byteCount;
+    letterPos = letterPos + 1;
+  end
+  return returnStr;
+end
+
+function toLower(name)
+  local returnStr = "";
+  local bytePos = 1;
+	while bytePos <= #name do
+    local byteCount = utf8charbytes(name, bytePos);
+    local c = name:sub(bytePos, bytePos + byteCount - 1);
+    returnStr = returnStr .. (utf8_uc_lc[c] or c);
+    bytePos = bytePos + byteCount;
+  end
+  return returnStr;
+end
+
+
+-- local testItem={[1]="плащ кардолана",[2]={1,6}};
+-- local searchInput = "Плащ";
+
+-- local searchTerm = toLower(searchInput);
+-- if string.find(testItem[1], searchTerm) then
+--   print("match: " .. addUppers(testItem[1], testItem[2]));
+-- else
+--   print("no match");
+-- end
