@@ -2,7 +2,7 @@
 
 
 ## Autoupdate script
-Just run PowerShell script to update all databases and (re)patch original plugin [/GaluhadPlugins/ItemTreasury/_update.ps1](/GaluhadPlugins/ItemTreasury/_update.ps1)
+Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin [/GaluhadPlugins/ItemTreasury/_update.ps1](/GaluhadPlugins/ItemTreasury/_update.ps1)
 
 ## Instructions
 Command to open Bruteforce window `/ru`
