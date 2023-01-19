@@ -32,16 +32,22 @@ add
 LoadBruteforceMod();
 ```
 
-3. [Windows/MainWin.lua:438](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L438) replace
+3. [Windows/MainWin.lua:389](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L389) replace
+`local searchName = {};`
+```
+local searchName = BriteforcePrepareSearchName(searchString);
+```
+
+4. [Windows/MainWin.lua:438](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L438) replace
 `nameMatch = match;`
 ```
-nameMatch = BruteforceSearch(k, searchString, match);
+nameMatch = BruteforceSearch(k, searchName, match);
 ```
 
-4. [Windows/MainWin.lua:679](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L679) replace
+5. [Windows/MainWin.lua:679](/GaluhadPlugins/ItemTreasury/Windows/MainWin.lua#L679) replace
 `lblName:SetText(itemInfo[1]);`
 ```
-BruteforceTextOverride(lblName,itemInfo,itemID)
+BruteforceTextOverride(lblName, itemInfo, itemID)
 ```
 
-5. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)
+6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)

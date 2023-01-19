@@ -38,15 +38,21 @@ CheckAndPatch `
 
 CheckAndPatch `
     -file ".\Windows\MainWin.lua" `
-    -pattern 'nameMatch = BruteforceSearch\(k, searchString, match\);' `
-    -replace 'nameMatch = match;' `
-    -patch "nameMatch = BruteforceSearch(k, searchString, match);"
+    -pattern 'local searchName = BriteforcePrepareSearchName\(searchString\);' `
+    -replace 'local searchName = {};' `
+    -patch "local searchName = BriteforcePrepareSearchName(searchString);"
 
 CheckAndPatch `
     -file ".\Windows\MainWin.lua" `
-    -pattern 'nameMatch = BruteforceSearch\(k, searchString, match\);' `
+    -pattern 'nameMatch = BruteforceSearch\(k, searchName, match\);' `
+    -replace 'nameMatch = match;' `
+    -patch "nameMatch = BruteforceSearch(k, searchName, match);"
+
+CheckAndPatch `
+    -file ".\Windows\MainWin.lua" `
+    -pattern 'BruteforceTextOverride\(lblName, itemInfo, itemID\)' `
     -replace 'lblName:SetText\(itemInfo\[1\]\);' `
-    -patch "BruteforceTextOverride(lblName,itemInfo,itemID)"
+    -patch "BruteforceTextOverride(lblName, itemInfo, itemID)"
 
 download `
     -from "https://github.com/william-aqn/item-treasury/raw/main/GaluhadPlugins/ItemTreasury/BruteforceMod.lua" `

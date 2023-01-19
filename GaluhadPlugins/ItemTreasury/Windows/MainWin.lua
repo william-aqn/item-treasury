@@ -386,7 +386,7 @@ function PrepareSearch()
 		return;
 	end
 
-	local searchName = {};
+	local searchName = BriteforcePrepareSearchName(searchString);
 	local searchStr = string.upper(StripAccent(searchString));
 	for w in string.gmatch(searchStr, "%a+") do
 		table.insert(searchName,w);
@@ -435,7 +435,7 @@ function PrepareSearch()
 				end
 			end
 			-- RU DB search
-			nameMatch = BruteforceSearch(k, searchString, match);
+			nameMatch = BruteforceSearch(k, searchName, match);
 		end
 
 		-- Item description
@@ -676,7 +676,7 @@ function GetItemInfoDisplay(itemID)
 	lblName:SetFont(_FONTS[2]);
 	lblName:SetForeColor(_QUALITYCOLORS[itemInfo[4]]);
 	lblName:SetMouseVisible(false);
-	BruteforceTextOverride(lblName,itemInfo,itemID)
+	BruteforceTextOverride(lblName, itemInfo, itemID)
 	--lblName:SetText(itemInfo[1]);
 
 	local lblCateg = Turbine.UI.Label();

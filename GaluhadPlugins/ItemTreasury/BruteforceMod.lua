@@ -1,7 +1,7 @@
 import("GaluhadPlugins.ItemTreasury.RuItems")
 
 -- by DCRM
-BruteforceVersion = "0.5";
+BruteforceVersion = "0.6";
 BruteforceWindow = Turbine.UI.Lotro.Window();
 
 BruteforceStartId = FIRSTID -- FIRSTID 1879049233
@@ -93,7 +93,17 @@ function BruteforceItemHard(itemIn)
     return "Запрос [" .. itemIn:GetName() .. "] - ничего не найдено"
 end
 
-function BruteforceSearch(i, searchString, match)
+function BriteforcePrepareSearchName(searchString)
+    local searchName = {};
+    local searchStr = string.upper(toUpper(StripAccent(searchString)));
+    searchStr = string.gsub(searchStr, "[%p%c]", ''):gsub("  ", ' '):gsub("  ", ' ')
+    for w in string.gmatch(searchStr, "%S+") do
+        table.insert(searchName, w);
+    end
+    return searchName
+end
+
+function BruteforceSearch(i, searchName, match)
     if match then
         return match
     end
@@ -101,14 +111,8 @@ function BruteforceSearch(i, searchString, match)
         return false
     end
 
-    local searchName = {};
-    local searchStr = toLower(StripAccent(searchString));
-    searchStr = string.gsub(searchStr, "[%p%c]", ''):gsub("  ", ' '):gsub("  ", ' ')
-    for w in string.gmatch(searchStr, "%S+") do
-        table.insert(searchName, w);
-    end
-
-    local nameStr = toLower(BruteforceRuDb[i][1]);
+    match = true
+    local nameStr = toUpper(BruteforceRuDb[i][1]);
     for wordKey, wordVal in pairs(searchName) do
         if string.find(nameStr, wordVal) == nil then
             match = false;
@@ -373,6 +377,17 @@ function toLower(name)
     return returnStr;
 end
 
+function toUpper(name)
+    local returnStr = "";
+    local bytePos = 1;
+    while bytePos <= #name do
+        local byteCount = utf8charbytes(name, bytePos);
+        local c = name:sub(bytePos, bytePos + byteCount - 1);
+        returnStr = returnStr .. (utf8_lc_uc[c] or c);
+        bytePos = bytePos + byteCount;
+    end
+    return returnStr;
+end
 -- local testItem={[1]="плащ кардолана",[2]={1,6}};
 -- local searchInput = "Плащ";
 
