@@ -7,7 +7,7 @@ Download [item-treasury-mod-0.6.zip](https://github.com/william-aqn/item-treasur
 Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin 
 * double click to `update.cmd`
 
-## Instructions
+## How to use
 Command to open Bruteforce window `/ru`
 
 Drop into Bruteforce window item from bag, result printed into chat
