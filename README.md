@@ -1,4 +1,4 @@
-# Быстрый поиск оригинального предмета для RU LOTRO [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
+# Быстрый поиск оригинального предмета для RU LOTRO
 
 ## Install
 Download [item-treasury-mod-0.6.zip](https://github.com/william-aqn/item-treasury/releases/download/release/item-treasury-mod-0.6.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
@@ -15,6 +15,10 @@ Drop into Bruteforce window item from bag, result printed into chat
 
 Or enter Русское название in search filed item-treasury windows
 ![How to use](/screen-window.png)
+
+## Mod based on
+- Original version [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
+- DB [34_1_2](https://github.com/dt192/item-treasury-database)
 
 ## New database source
 https://github.com/dt192/item-treasury-database
