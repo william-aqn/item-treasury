@@ -1,4 +1,4 @@
-# Быстрый поиск оригинального предмета для RU LOTRO
+# Быстрый поиск оригинального предмета RU LOTRO
 
 ## Install
 Download [item-treasury-mod-0.6.zip](https://github.com/william-aqn/item-treasury/releases/download/release/item-treasury-mod-0.6.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
