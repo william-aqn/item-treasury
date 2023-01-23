@@ -190,10 +190,7 @@ function LoadBruteforceMod()
         Windows.wMainWin:Activate();
     end
 
-    function BruteforceWindow:DragEnter(args)
-    end
-
-    function BruteforceWindow:DragDrop(args)
+    function BruteforceProcess(args)
         local item = args.DragDropInfo:GetShortcut():GetItem();
         BruteforceCaption:SetText("Поиск ...")
         local result = BruteforceItem(item)
@@ -212,12 +209,31 @@ function LoadBruteforceMod()
         end
     end
 
+    -- TODO:
+    -- cDeskIcon.DragDrop = function (sender, args)
+    --     print(Dump(args))
+    --     BruteforceWindow:SetVisible(true);
+    --     BruteforceProcess(args)
+    -- end
+
+    -- Добавляем функционал открытия окна bruteforce по правому клику на значок плагина
+	cDeskIcon.MouseClick = function (sender, args)
+		if (args.Button == Turbine.UI.MouseButton.Right) then
+			if type(cDeskIcon.Windows) ~= 'table' then return end;
+            BruteforceWindow:SetVisible(true);
+		end
+	end
+
+    function BruteforceWindow:DragDrop(args)
+        BruteforceProcess(args)
+    end
+
     RegisterCommandsBruteforce();
 
     print("RU БД версия " .. BruteforceRuDbVersion .. ", модификация версия " ..
         BruteforceVersion .. ", by DCRM");
     print("FirstID = " .. BruteforceStartId .. "; LastId = " .. BruteforceEndId .. ";");
-    print("Используйте команду '/ru' что бы показать/скрыть окно перевода предметов");
+    print("Используйте команду '/ru' что бы показать/скрыть окно перевода предметов или щёлкните правой кнопкой мыши по значку плагина");
 
 end
 
