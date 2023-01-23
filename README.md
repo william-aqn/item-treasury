@@ -8,7 +8,7 @@ Just run PowerShell script from plugin folder to update all databases and (re)pa
 * double click to `update.cmd`
 
 ## How to use
-Command to open Bruteforce window `/ru`
+Command to open Bruteforce window `/ru` or right mouse click on plugin icon
 
 Drop into Bruteforce window item from bag, result printed into chat
 ![How to use](/screen.png)
