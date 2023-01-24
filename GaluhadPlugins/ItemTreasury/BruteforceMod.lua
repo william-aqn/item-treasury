@@ -1,4 +1,5 @@
 import("GaluhadPlugins.ItemTreasury.RuItems")
+import("GaluhadPlugins.ItemTreasury.StringsRu")
 
 -- by DCRM
 BruteforceVersion = "0.6";
@@ -141,6 +142,9 @@ function RegisterCommandsBruteforce()
 end
 
 function LoadBruteforceMod()
+    -- Переключаем интерфейс на Русский
+    LANGID = 4;
+    Windows.DrawWindows();
 
     -- Переключатель ru/en
     ddLang = Utils.DropDown({ "ru", "en", "all" });

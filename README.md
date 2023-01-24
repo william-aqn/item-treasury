@@ -1,7 +1,7 @@
 # Быстрый поиск оригинального предмета RU LOTRO
 
 ## Install
-Download [item-treasury-mod-0.6.1.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.1/item-treasury-mod-0.6.1.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
+Download [item-treasury-mod-0.6.2.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.2/item-treasury-mod-0.6.2.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
 
 ## [Auto-update](/GaluhadPlugins/ItemTreasury/_update.ps1) script
 Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin 
@@ -56,4 +56,4 @@ nameMatch = BruteforceSearch(k, searchName, match);
 BruteforceTextOverride(lblName, itemInfo, itemID)
 ```
 
-6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua)
+6. Don't forget the file :) [BruteforceMod.lua](/GaluhadPlugins/ItemTreasury/BruteforceMod.lua) and [RuItems.lua](/GaluhadPlugins/ItemTreasury/RuItems.lua) and [StringsRu.lua](/GaluhadPlugins/ItemTreasury/StringsRu.lua)
