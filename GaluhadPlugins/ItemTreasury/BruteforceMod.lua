@@ -237,7 +237,7 @@ function LoadBruteforceMod()
     print("RU БД версия " .. BruteforceRuDbVersion .. ", модификация версия " ..
         BruteforceVersion .. ", by DCRM");
     print("FirstID = " .. BruteforceStartId .. "; LastId = " .. BruteforceEndId .. ";");
-    print("Используйте команду '/ru' что бы показать/скрыть окно перевода предметов или щёлкните правой кнопкой мыши по значку плагина");
+    print("Используйте команду '/ru' чтобы показать/скрыть окно перевода предметов или щёлкните правой кнопкой мыши по значку плагина");
 
 end
 
