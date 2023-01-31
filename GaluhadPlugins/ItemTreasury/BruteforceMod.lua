@@ -163,7 +163,7 @@ function LoadBruteforceMod()
     BruteforceWindow:SetLeft((Turbine.UI.Display:GetWidth() - 300) / 4);
     BruteforceWindow:SetText("ID Bruteforce");
     BruteforceWindow:SetAllowDrop(true);
-    BruteforceWindow:SetVisible(true);
+    -- BruteforceWindow:SetVisible(true);
 
     -- Подсказка
     local BruteforceCaption = Turbine.UI.Label()
