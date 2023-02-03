@@ -1,7 +1,7 @@
 # Быстрый поиск оригинального предмета RU LOTRO
 
 ## Install
-Download [item-treasury-mod-0.6.2.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.2/item-treasury-mod-0.6.2.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
+Download [item-treasury-mod-0.6.3.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.3/item-treasury-mod-0.6.3.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
 
 ## [Auto-update](/GaluhadPlugins/ItemTreasury/_update.ps1) script
 Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin 
@@ -18,7 +18,7 @@ Or enter Русское название in search filed item-treasury windows
 
 ## Mod based on
 - Original version [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
-- DB [34_1_2](https://github.com/dt192/item-treasury-database)
+- DB [34.2.0](https://github.com/dt192/item-treasury-database)
 
 ## New database source
 https://github.com/dt192/item-treasury-database
