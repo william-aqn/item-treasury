@@ -1,7 +1,7 @@
 # Быстрый поиск оригинального предмета RU LOTRO
 
 ## Install
-Download [item-treasury-mod-0.6.3.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.4/item-treasury-mod-0.6.4.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
+Download [item-treasury-mod-0.6.4.zip](https://github.com/william-aqn/item-treasury/releases/download/update-0.6.4/item-treasury-mod-0.6.4.zip) and unpack into `Documents\The Lord of the Rings Online\Plugins\`
 
 ## [Auto-update](/GaluhadPlugins/ItemTreasury/_update.ps1) script
 Just run PowerShell script from plugin folder to update all databases and (re)patch original plugin 
