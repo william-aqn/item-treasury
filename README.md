@@ -18,7 +18,7 @@ Or enter Русское название in search filed item-treasury windows
 
 ## Mod based on
 - Original version [item-treasury 33.0.5](http://www.lotrointerface.com/downloads/info870)
-- DB [35.1.3](https://github.com/dt192/item-treasury-database)
+- DB [36.0.2](https://github.com/dt192/item-treasury-database)
 
 ## New database source
 https://github.com/dt192/item-treasury-database
